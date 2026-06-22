@@ -110,7 +110,10 @@ func TestGetAirportSuccess(t *testing.T) {
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]interface{}{"name": "John F Kennedy International Airport"})
+		err := json.NewEncoder(w).Encode(map[string]interface{}{"name": "John F Kennedy International Airport"})
+		if err != nil {
+			return
+		}
 	}))
 	defer server.Close()
 
@@ -142,7 +145,10 @@ func TestGetAirportNetworkError(t *testing.T) {
 func TestGetAirportInvalidJSON(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("invalid json"))
+		_, err := w.Write([]byte("invalid json"))
+		if err != nil {
+			return
+		}
 	}))
 	defer server.Close()
 
@@ -161,7 +167,10 @@ func TestGetAirportInvalidJSON(t *testing.T) {
 func TestGetAirportHTTPError(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
-		io.WriteString(w, "server error")
+		_, err := io.WriteString(w, "server error")
+		if err != nil {
+			return
+		}
 	}))
 	defer server.Close()
 
