@@ -1,5 +1,7 @@
 # airport-db-client
 
+[![Lint](https://github.com/deanstalker-stream/airport-db-client/actions/workflows/lint.yml/badge.svg)](https://github.com/deanstalker-stream/airport-db-client/actions/workflows/lint.yml) [![Test](https://github.com/deanstalker-stream/airport-db-client/actions/workflows/test.yml/badge.svg)](https://github.com/deanstalker-stream/airport-db-client/actions/workflows/test.yml)
+
 Provides a client for the AirportDB API.
 
 https://airportdb.io/
