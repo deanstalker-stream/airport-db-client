@@ -13,13 +13,6 @@ import (
 	"go.uber.org/zap"
 )
 
-func newClient(t *testing.T, url, key string) *Client {
-	t.Helper()
-	client, err := NewClient(zap.NewNop(), &Config{URL: url, Key: key})
-	require.NoError(t, err)
-	return client
-}
-
 // TestNewClient tests the creation of a new Client via NewClient
 func TestNewClient(t *testing.T) {
 	client, err := NewClient(zap.NewNop(), &Config{URL: "https://api.airportdb.io", Key: "test-key"})
